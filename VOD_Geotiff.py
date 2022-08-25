@@ -20,7 +20,7 @@ i = 1
 
 # If your netcdf file has a time variable, and you want one specific day,
 # uncomment the next line and set the time to what you want
-for x in range(61, 92):
+for x in range(61, 65):
     VOD_DATA = VOD.isel(time = x) # LINE TO UNCOMMENT!!!!!
     # If your netcdf file has a time variable, and you want to get an average over a
     # specific time period, uncomment the next line and set the time
@@ -30,7 +30,7 @@ for x in range(61, 92):
     # If your netcdf does not have a time variable, leave both of the previous lines of code commented
 
     # Setting geotiff x/y to the latitude/longitude
-    VOD_DATA = VOD.rio.set_spatial_dims(x_dim='lon', y_dim='lat')
+    VOD_DATA = VOD_DATA.rio.set_spatial_dims(x_dim='lon', y_dim='lat')
 
     # Adding the ease 2.0 projection
     VOD_DATA.rio.write_crs("epsg:6933", inplace=True)
