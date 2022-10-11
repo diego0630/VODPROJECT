@@ -20,7 +20,7 @@ i = 1
 
 # If your netcdf file has a time variable, and you want one specific day,
 # uncomment the next line and set the time to what you want
-for x in range(61, 65):
+for x in range(61, 92):
     VOD_DATA = VOD.isel(time = x) # LINE TO UNCOMMENT!!!!!
     # If your netcdf file has a time variable, and you want to get an average over a
     # specific time period, uncomment the next line and set the time
