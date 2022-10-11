@@ -4,14 +4,31 @@ library(magrittr)
 library(raster)
 library(rgdal)
 library(tiff)
-str_name<-'/Users/student/Documents/VOD_Project/vod_june_2017.tif' 
-imported_raster=raster(str_name)
-vod_june_2017 <- imported_raster %>%
-  select(lon,lat,VOD)
+
+# Current Code
+  
+str_name<-'/Users/student/Documents/VOD_Project/vod_summer_geotiff/vod_june_2016_3.tiff'
+imported_raster = raster(str_name)
+plot(imported_raster)
+
+locations <- read.csv("/Users/student/Documents/VOD_Project/locations.csv", header=TRUE)
+coords = data.frame(lat=locations[,2],long=locations[,3])
+coordinates(coords)=c("long","lat")
+points(coords,col="red")
+
+VOD_Extract = as.data.frame(extract(x=imported_raster,y=coords),row.names=as.character(locations$site),)
+print(VOD_Extract)
+
+
+
+
+# Previous Code
+vod_june_2017 <- str_name %>%
+  select(nrow, ncol, ncell)
 rownames(vod_june_2017) <- NULL
 
 # prepare coordinates, data, and proj4string
-coords_vod <- vod_june_2017[ , c("lon", "lat")]   # coordinates
+coords_vod <- vod_june_2017[ , c("nrow", "ncol")]   # coordinates
 data_vod   <- vod_june_2017[ , 3]          # data
 
 # make the SpatialPointsDataFrame object
